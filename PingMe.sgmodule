@@ -6,7 +6,7 @@
 
 [Script]
 PingMe-Capture = type=http-request,pattern=^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus,script-path=https://sc.101825.xyz/files/PingMe.js,requires-body=false
-PingMe-Task = type=cron,cronexp="{{{cronexp}}}",script-path=https://sc.101825.xyz/files/PingMe.js
+PingMe-Task = type=cron,cronexp="{{{cronexp}}}",script-path=https://sc.101825.xyz/files/PingMe.js,timeout=120,wake-system=1,max-size=0
 
 [MITM]
 hostname = %APPEND% api.pingmeapp.net
