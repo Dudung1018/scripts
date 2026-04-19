@@ -1,11 +1,12 @@
 #!name=PingMe 自动化签到+视频奖励
 #!desc=PingMe 自动签到与视频奖励任务
 #!author=怎么肥事（Surge适配整理）
-#!arguments=CRONEXP=30%208,20%20*%20*%20*
+#!arguments=cronexp:30 8,20 * * *
+#!arguments-desc=cronexp: 定时任务表达式，默认每天 8:30 和 20:30 执行
 
 [Script]
-PingMe-Capture = type=http-request, pattern=^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus, script-path=https://sc.101825.xyz/files/PingMe.js, requires-body=false
-PingMe-Task = type=cron, cronexp="%CRONEXP%", script-path=https://sc.101825.xyz/files/PingMe.js
+PingMe-Capture = type=http-request,pattern=^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus,script-path=https://sc.101825.xyz/files/PingMe.js,requires-body=false
+PingMe-Task = type=cron,cronexp="{{{cronexp}}}",script-path=https://sc.101825.xyz/files/PingMe.js
 
 [MITM]
 hostname = %APPEND% api.pingmeapp.net
