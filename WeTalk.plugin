@@ -4,14 +4,14 @@
 #!version = 1.0.0
 
 [Argument]
-Capture = select,"true","false",tag=[抓包] 开关,desc=是否开启账号抓包入库
-Cron = select,"true","false",tag=[任务] 开关,desc=是否开启签到和视频任务
-CronExp = input,"40 8,20 * * *",tag=[任务] Cron 表达式,desc=定时任务执行时间
+Capture = select,true,false,tag=[获取账号] 开关,desc=是否开启账号抓包入库
+Cron = select,true,false,tag=[签到] 开关,desc=是否开启签到和视频任务
+CronExp = input,"40 8,20 * * *",tag=[定时表达式] Cron 表达式,desc=定时任务执行时间
 
 [Script]
-http-request ^https:\/\/api\.wetalkapp\.com\/app\/queryBalanceAndBonus script-path=https://sc.101825.xyz/script/WeTalk.js, requires-body=false, timeout=60, tag=WeTalk_Capture, argument=[{Capture}]
+http-request ^https:\/\/api\.wetalkapp\.com\/app\/queryBalanceAndBonus script-path=https://sc.101825.xyz/script/WeTalk.js, requires-body=false, timeout=60, tag=WeTalk_Capture, enable={Capture}
 
-cron "{CronExp}" script-path=https://sc.101825.xyz/script/WeTalk.js, timeout=300, tag=WeTalk_Cron, argument=[{Cron}]
+cron "{CronExp}" script-path=https://sc.101825.xyz/script/WeTalk.js, timeout=300, tag=WeTalk_Cron, enable={Cron}
 
 [MITM]
 hostname = api.wetalkapp.com
