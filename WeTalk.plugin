@@ -1,0 +1,12 @@
+#!name=WeTalk 自动化签到+视频奖励
+#!desc=WeTalk 抓包入库 + 定时签到 + 视频奖励
+#!author=TG@ZenMoFiShi
+#!arguments=cronexp:40 8,20 * * *,capture:true,cron:true
+
+[Script]
+http-request ^https:\/\/api\.wetalkapp\.com\/app\/queryBalanceAndBonus script-path=https://sc.101825.xyz/script/WeTalk.js, requires-body=false, timeout=60, tag=WeTalk_Capture, enabled={{capture}}
+
+cron "{{cronexp}}" script-path=https://sc.101825.xyz/script/WeTalk.js, timeout=300, tag=WeTalk_Cron, enabled={{cron}}
+
+[MITM]
+hostname = api.wetalkapp.com
