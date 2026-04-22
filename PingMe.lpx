@@ -1,0 +1,17 @@
+#!name = PingMe 自动化签到+视频奖励
+#!desc = 抓包入库 + 定时签到
+#!author = TG@ZenMoFiShi
+#!version = 1.0.0
+
+[Argument]
+Capture = select,"true","false",tag=[获取账号] 开关,desc=是否开启账号抓包入库
+Cron = select,"true","false",tag=[签到] 开关,desc=是否开启签到和视频任务
+CronExp = input,"00 8,20 * * *",tag=[定时表达式] Cron 表达式,desc=定时任务执行时间
+
+[Script]
+http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://sc.101825.xyz/script/PingMe.js, requires-body=false, timeout=60, tag=WeTalk_Capture, enable={Capture}
+
+cron {CronExp} script-path=https://sc.101825.xyz/script/PingMe.js, timeout=300, tag=WeTalk_Cron, enable={Cron}
+
+[MITM]
+hostname = api.pingmeapp.net
