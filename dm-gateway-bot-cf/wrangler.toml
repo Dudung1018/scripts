@@ -1,0 +1,17 @@
+name = "dm-gateway-bot"
+main = "src/index.ts"
+compatibility_date = "2025-05-06"
+
+# KV namespace for storing verified/pending users
+# Create with: wrangler kv:namespace create DM_GATEWAY_KV
+# Then add the id below:
+# kv_namespaces = [
+#   { binding = "DM_GATEWAY_KV", id = "your-kv-namespace-id" }
+# ]
+
+# Set secrets with:
+# wrangler secret put BOT_TOKEN
+# wrangler secret put OWNER_ID
+
+[observability]
+enabled = true
